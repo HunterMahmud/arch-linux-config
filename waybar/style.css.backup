@@ -1,0 +1,194 @@
+/* ===== Palette (GTK CSS) ===== */
+@define-color bar_bg rgba(20, 20, 24, 0.6);
+@define-color text_color #eaeef2;
+@define-color text_dim #9aa3ad;
+
+@define-color module_bg rgba(32, 34, 40, 0.6);
+@define-color module_hover rgba(50, 54, 64, 0.7);
+
+@define-color accent_color #00b894;
+@define-color accent_alt   #00a085;
+@define-color accent_shadow rgba(0, 184, 148, 0.35);
+
+@define-color bg_color #0f1115;
+
+@define-color workspace_bg rgba(45, 49, 58, 0.5);
+@define-color urgent_color #ff5252;
+@define-color taskbar_bg rgba(45, 49, 58, 0.5);
+
+@define-color clock_bg #2d3436;
+@define-color clock_alt #3c4042;
+
+@define-color network_color #81d4fa;
+@define-color network_bg rgba(33, 150, 243, 0.2);
+@define-color wifi_color #4fc3f7;
+
+@define-color error_color #ff6b6b;
+@define-color error_bg rgba(255, 107, 107, 0.18);
+
+@define-color bluetooth_color #8ab4f8;
+@define-color success_color #00e676;
+@define-color success_bg rgba(0, 230, 118, 0.18);
+
+@define-color cpu_color #ffd166;
+@define-color cpu_bg rgba(255, 209, 102, 0.18);
+@define-color memory_color #f78fb3;
+@define-color memory_bg rgba(247, 143, 179, 0.18);
+@define-color battery_color #fbc531;
+
+@define-color warning_color #fbc531;
+@define-color warning_bg rgba(251, 197, 49, 0.18);
+@define-color audio_color #74b9ff;
+@define-color brightness_color #ffeaa7;
+
+@define-color theme_color #a29bfe;
+@define-color theme_bg #6c5ce7;
+@define-color theme_alt #4e44d4;
+
+@define-color power_color #ff7675;
+@define-color power_bg #d63031;
+@define-color power_alt #c23616;
+
+/* Soft shadow stand-ins (GTK doesn’t support arbitrary box-shadow everywhere) */
+@define-color shadow rgba(0, 0, 0, 0.25);
+@define-color shadow_hover rgba(0, 0, 0, 0.35);
+
+
+/* Base */
+* {
+  font-family: "JetBrains Mono", "Font Awesome 6 Free", monospace;
+  font-size: 13px;
+  font-weight: bold;
+  margin: 0;
+  padding: 0;
+  border: none;
+  border-radius: 0;
+  min-height: 0;
+}
+
+window#waybar {
+  background: transparent;
+  color: @text_color;
+  transition: 500ms;
+}
+
+/* Module containers */
+.modules-left,
+.modules-center,
+.modules-right {
+  background-color: @bar_bg;
+  border-radius: 8px;
+  padding: 0;
+  margin: 0;
+  /* GTK has limited shadow support; fallback via borders/alpha */
+  box-shadow: 0 2px 4px @shadow;
+}
+
+/* Individual modules */
+#custom-launcher,
+#workspaces button,
+#taskbar button,
+#clock,
+#custom-network-speed,
+#network,
+#bluetooth,
+#cpu,
+#memory,
+#battery,
+#pulseaudio,
+#backlight,
+#custom-theme-switcher,
+#custom-power {
+  padding: 1px 6px;
+  margin: 1px 2px;
+  border-radius: 8px;
+  background-color: @module_bg;
+  color: @text_color;
+  transition: 300ms;
+}
+
+/* Hover */
+#custom-launcher:hover,
+#workspaces button:hover,
+#taskbar button:hover,
+#clock:hover,
+#custom-network-speed:hover,
+#network:hover,
+#bluetooth:hover,
+#cpu:hover,
+#memory:hover,
+#battery:hover,
+#pulseaudio:hover,
+#backlight:hover,
+#custom-theme-switcher:hover,
+#custom-power:hover {
+  background-color: @module_hover;
+  color: @accent_color;
+}
+
+/* Launcher (no linear-gradient in GTK reliably) */
+#custom-launcher {
+  color: @bg_color;
+  background-color: @accent_color; /* simple fallback for gradient */
+}
+
+/* Workspaces */
+#workspaces { background: transparent; }
+#workspaces button {
+  color: @text_dim;
+  background-color: @workspace_bg;
+  min-width: 24px;
+}
+#workspaces button.active {
+  background-color: @accent_color;
+  color: @bg_color;
+}
+
+/* Taskbar */
+#taskbar { background: transparent; }
+#taskbar button {
+  min-width: 22px;
+  background-color: @taskbar_bg;
+}
+#taskbar button.active {
+  background-color: @accent_color;
+  color: @bg_color;
+}
+
+/* Clock */
+#clock {
+  font-weight: bold;
+  background-color: @clock_bg;
+  color: @text_color;
+}
+
+/* Network Speed */
+#custom-network-speed { color: @network_color; background-color: @network_bg; }
+
+/* Network */
+#network { color: @wifi_color; }
+#network.disconnected { color: @error_color; background-color: @error_bg; }
+
+/* Bluetooth */
+#bluetooth { color: @bluetooth_color; }
+#bluetooth.disabled { color: @text_dim; }
+#bluetooth.connected { color: @success_color; background-color: @success_bg; }
+
+/* CPU / Memory */
+#cpu { color: @cpu_color; background-color: @cpu_bg; }
+#memory { color: @memory_color; background-color: @memory_bg; }
+
+/* Battery */
+#battery { color: @battery_color; }
+#battery.charging { color: @success_color; background-color: @success_bg; }
+#battery.warning { color: @warning_color; background-color: @warning_bg; }
+#battery.critical { color: @error_color; background-color: @error_bg; }
+
+/* Audio / Backlight */
+#pulseaudio { color: @audio_color; }
+#pulseaudio.muted { color: @error_color; background-color: @error_bg; }
+#backlight { color: @brightness_color; }
+
+/* Theme / Power */
+#custom-theme-switcher { color: @theme_color; background-color: @theme_bg; }
+#custom-power { color: @power_color; background-color: @power_bg; }
